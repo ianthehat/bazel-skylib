@@ -60,12 +60,15 @@ def _dirname(p):
 def _is_absolute(path):
   """Returns `True` if `path` is an absolute path.
 
+  True both for UNIX-style absolute paths "/foo" and Windows-style "C:/foo".
+  False for a Windows-style volume label "C:" which is actually a relative path.
+
   Args:
     path: A path (which is a string).
   Returns:
     `True` if `path` is an absolute path.
   """
-  return path.startswith("/") or (len(path)>2 and path[1] == ":")
+  return path.startswith("/") or (len(path) > 2 and path[1] == ":")
 
 
 def _join(path, *others):
